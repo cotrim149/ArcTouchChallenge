@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 class MoviesDAO: NSObject {
 	
 	func upcoming(inPage page:Int) {
-		let apiKey = "1f54bd990f1cdfb230adb312546d765d"
+		let apiKey = URLProvider.apiKey
 		let language = "en-US"
 		
 		let url = URLProvider.upcomingMovies(withApiKey: apiKey, language: language, forPage: page)
@@ -29,12 +29,17 @@ class MoviesDAO: NSObject {
 	}
 	
 	
-	
 }
 
 extension URLProvider {
 	
 	static func upcomingMovies(withApiKey apiKey:String, language:String, forPage page:Int) -> URL {
-		return URL(string: URLProvider.baseMovies.appending("/upcoming?api_key=\(apiKey)&language=\(language)&page=\(page)"))!
+		
+		guard let url = URL(string: URLProvider.baseMovies.appending("/upcoming?api_key=\(apiKey)&language=\(language)&page=\(page)")) else {
+			
+			return URL(string: "UpcomingMovies URL cannot be instancied")!
+		}
+		
+		return url
 	}
 }
