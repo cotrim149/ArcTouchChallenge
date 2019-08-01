@@ -25,9 +25,11 @@ class MoviesDAO: NSObject {
 			
 			print(upcomingMovies)
 
-
 		}
 	}
+	
+	
+	
 }
 
 extension URLProvider {
