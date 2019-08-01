@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		9F5E8ECD22F263C5005CD65E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8ECC22F263C5005CD65E /* Assets.xcassets */; };
 		9F5E8ED022F263C5005CD65E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8ECE22F263C5005CD65E /* LaunchScreen.storyboard */; };
 		9F5E8EDB22F263C5005CD65E /* ATCodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EDA22F263C5005CD65E /* ATCodeChallengeTests.swift */; };
+		9F5E8EE822F26D85005CD65E /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EE722F26D85005CD65E /* URLProvider.swift */; };
 		B569F1A9983A16E3AD3D891E /* Pods_ATCodeChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8673B6E80355B0D04F57A37D /* Pods_ATCodeChallengeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		9F5E8ED622F263C5005CD65E /* ATCodeChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATCodeChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5E8EDA22F263C5005CD65E /* ATCodeChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATCodeChallengeTests.swift; sourceTree = "<group>"; };
 		9F5E8EDC22F263C5005CD65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F5E8EE722F26D85005CD65E /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
 		D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,8 @@
 		9F5E8EC422F263C3005CD65E /* ATCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				9F5E8EE622F26D16005CD65E /* DAO */,
+				9F5E8EE522F26B13005CD65E /* Service */,
 				9F5E8EC522F263C3005CD65E /* AppDelegate.swift */,
 				9F5E8EC722F263C3005CD65E /* ViewController.swift */,
 				9F5E8EC922F263C3005CD65E /* Main.storyboard */,
@@ -117,6 +121,21 @@
 			path = ATCodeChallengeTests;
 			sourceTree = "<group>";
 		};
+		9F5E8EE522F26B13005CD65E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9F5E8EE722F26D85005CD65E /* URLProvider.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		9F5E8EE622F26D16005CD65E /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
 		DBA64B7E8252E0E096BEE84C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +144,6 @@
 				D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */,
 				444E5724ECE44EC63AD1F5D1 /* Pods-ATCodeChallengeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -299,6 +317,7 @@
 			files = (
 				9F5E8EC822F263C3005CD65E /* ViewController.swift in Sources */,
 				9F5E8EC622F263C3005CD65E /* AppDelegate.swift in Sources */,
+				9F5E8EE822F26D85005CD65E /* URLProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
