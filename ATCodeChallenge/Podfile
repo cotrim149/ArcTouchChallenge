@@ -10,6 +10,7 @@ target 'ATCodeChallenge' do
   target 'ATCodeChallengeTests' do
     inherit! :search_paths
     pod 'Alamofire'
+		pod 'ObjectMapper'
   end
 
 end
