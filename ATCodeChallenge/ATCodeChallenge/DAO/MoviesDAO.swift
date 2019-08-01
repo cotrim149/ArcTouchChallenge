@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireObjectMapper
 
 class MoviesDAO: NSObject {
 	
@@ -16,8 +17,15 @@ class MoviesDAO: NSObject {
 		let language = "en-US"
 		
 		let url = URLProvider.upcomingMovies(withApiKey: apiKey, language: language, forPage: page)
-		Alamofire.request(url).responseJSON { (response) in
-			print(response);
+		Alamofire.request(url).responseObject { (response: DataResponse<UpcomingMovies>) in
+
+			guard let upcomingMovies = response.result.value else {
+				return
+			}
+			
+			print(upcomingMovies)
+
+
 		}
 	}
 }
