@@ -14,7 +14,5 @@ class URLProvider: NSObject {
 	
 	static let baseMovies = "\(base)/movie"
 	
-	static let upcomingMovies = "\(baseMovies)/upcoming"
-	
 	
 }
