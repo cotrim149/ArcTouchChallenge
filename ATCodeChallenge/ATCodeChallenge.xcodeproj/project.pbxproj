@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FDAD686A72E1C634B8DF955 /* Pods_ATCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F1A0AAC9EF88CF95A3CFA1 /* Pods_ATCodeChallenge.framework */; };
 		9F5E8EC622F263C3005CD65E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EC522F263C3005CD65E /* AppDelegate.swift */; };
 		9F5E8EC822F263C3005CD65E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EC722F263C3005CD65E /* ViewController.swift */; };
 		9F5E8ECB22F263C3005CD65E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8EC922F263C3005CD65E /* Main.storyboard */; };
 		9F5E8ECD22F263C5005CD65E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8ECC22F263C5005CD65E /* Assets.xcassets */; };
 		9F5E8ED022F263C5005CD65E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8ECE22F263C5005CD65E /* LaunchScreen.storyboard */; };
 		9F5E8EDB22F263C5005CD65E /* ATCodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EDA22F263C5005CD65E /* ATCodeChallengeTests.swift */; };
+		B569F1A9983A16E3AD3D891E /* Pods_ATCodeChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8673B6E80355B0D04F57A37D /* Pods_ATCodeChallengeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		444E5724ECE44EC63AD1F5D1 /* Pods-ATCodeChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		4C2E4AA13B2925D91F173B43 /* Pods-ATCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ATCodeChallenge/Pods-ATCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		57F1A0AAC9EF88CF95A3CFA1 /* Pods_ATCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8673B6E80355B0D04F57A37D /* Pods_ATCodeChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATCodeChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86ADD763148A51970EEF4283 /* Pods-ATCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-ATCodeChallenge/Pods-ATCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		9F5E8EC222F263C3005CD65E /* ATCodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATCodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5E8EC522F263C3005CD65E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F5E8EC722F263C3005CD65E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +43,7 @@
 		9F5E8ED622F263C5005CD65E /* ATCodeChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATCodeChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5E8EDA22F263C5005CD65E /* ATCodeChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATCodeChallengeTests.swift; sourceTree = "<group>"; };
 		9F5E8EDC22F263C5005CD65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FDAD686A72E1C634B8DF955 /* Pods_ATCodeChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +59,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B569F1A9983A16E3AD3D891E /* Pods_ATCodeChallengeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38FCB9F82C7FE94AA45B0CBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57F1A0AAC9EF88CF95A3CFA1 /* Pods_ATCodeChallenge.framework */,
+				8673B6E80355B0D04F57A37D /* Pods_ATCodeChallengeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9F5E8EB922F263C3005CD65E = {
 			isa = PBXGroup;
 			children = (
 				9F5E8EC422F263C3005CD65E /* ATCodeChallenge */,
 				9F5E8ED922F263C5005CD65E /* ATCodeChallengeTests */,
 				9F5E8EC322F263C3005CD65E /* Products */,
+				DBA64B7E8252E0E096BEE84C /* Pods */,
+				38FCB9F82C7FE94AA45B0CBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +117,18 @@
 			path = ATCodeChallengeTests;
 			sourceTree = "<group>";
 		};
+		DBA64B7E8252E0E096BEE84C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C2E4AA13B2925D91F173B43 /* Pods-ATCodeChallenge.debug.xcconfig */,
+				86ADD763148A51970EEF4283 /* Pods-ATCodeChallenge.release.xcconfig */,
+				D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */,
+				444E5724ECE44EC63AD1F5D1 /* Pods-ATCodeChallengeTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,6 +136,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F5E8EDF22F263C5005CD65E /* Build configuration list for PBXNativeTarget "ATCodeChallenge" */;
 			buildPhases = (
+				5550320618C3961D78344F65 /* [CP] Check Pods Manifest.lock */,
 				9F5E8EBE22F263C3005CD65E /* Sources */,
 				9F5E8EBF22F263C3005CD65E /* Frameworks */,
 				9F5E8EC022F263C3005CD65E /* Resources */,
@@ -120,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F5E8EE222F263C5005CD65E /* Build configuration list for PBXNativeTarget "ATCodeChallengeTests" */;
 			buildPhases = (
+				D736B757E3B084F9D5D626AC /* [CP] Check Pods Manifest.lock */,
 				9F5E8ED222F263C5005CD65E /* Sources */,
 				9F5E8ED322F263C5005CD65E /* Frameworks */,
 				9F5E8ED422F263C5005CD65E /* Resources */,
+				99D721037F1AA83C2CD89037 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +227,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5550320618C3961D78344F65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ATCodeChallenge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99D721037F1AA83C2CD89037 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D736B757E3B084F9D5D626AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ATCodeChallengeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9F5E8EBE22F263C3005CD65E /* Sources */ = {
@@ -358,6 +458,7 @@
 		};
 		9F5E8EE022F263C5005CD65E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C2E4AA13B2925D91F173B43 /* Pods-ATCodeChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -376,6 +477,7 @@
 		};
 		9F5E8EE122F263C5005CD65E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86ADD763148A51970EEF4283 /* Pods-ATCodeChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -394,6 +496,7 @@
 		};
 		9F5E8EE322F263C5005CD65E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -415,6 +518,7 @@
 		};
 		9F5E8EE422F263C5005CD65E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 444E5724ECE44EC63AD1F5D1 /* Pods-ATCodeChallengeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
