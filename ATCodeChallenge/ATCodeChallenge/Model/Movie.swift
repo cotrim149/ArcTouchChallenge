@@ -48,13 +48,6 @@ class Movie: Mappable {
 		release_date <- map["release_date"]
 	}
 	
-	override var description: String {
-		return "Movie: [id: \(String(describing: id)), title: \(String(describing: title))]"
-	}
-	
-	var debugDescription: String {
-		return "Movie: [id: \(String(describing: id)), title: \(String(describing: title))]"
-	}
 }
 
 //{
