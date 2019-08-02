@@ -10,12 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet weak var posterImage: UIImageView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.retrieveTMDbConfigurations()
-		self.retrieveUpcomingMovies()
 	}
 
+	override func viewDidAppear(_ animated: Bool) {
+		self.retrieveUpcomingMovies()
+	}
+	
 	func retrieveTMDbConfigurations() {
 		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
 			(configuration) in
@@ -40,9 +44,14 @@ class ViewController: UIViewController {
 		movieDAO.upcoming(inPage: 1, completionHandler: {
 			(movies) in
 			
-			let imageData = movieDAO.imageMovie(fromMovie: movies?.first, isPoster: true)
-			movies?.first?.posterImageData = imageData
-			
+			movieDAO.imageMovie(fromMovie: movies?.first, isPoster: true, completionHandler: {
+				(imageData) in
+				
+				movies?.first?.posterImageData = imageData
+				
+				self.posterImage.image = UIImage(data: imageData)
+
+			})
 			
 		})
 		

@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
-import Alamofire_Synchronous
 
 class MoviesDAO: NSObject {
 	
@@ -29,10 +28,11 @@ class MoviesDAO: NSObject {
 		}
 	}
 	
-	func imageMovie(fromMovie: Movie?, isPoster: Bool) -> Data? {
+
+	func imageMovie(fromMovie: Movie?, isPoster: Bool, completionHandler completion: @escaping (_ imageData: Data)->Void) {
 		
 		guard let movie = fromMovie else {
-			return nil
+			return
 		}
 		
 		var imageSize = ""
@@ -46,13 +46,25 @@ class MoviesDAO: NSObject {
 		}
 		
 		let url = URLProvider.imageMovie(withSize: imageSize, inFilePath: filePath)
-		
-		let imageData = Alamofire.download(url).responseData().result.value
 
-		return imageData
+		let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+			let documentsURL = URL(fileURLWithPath: documentsPath, isDirectory: true)
+			let fileURL = documentsURL.appendingPathComponent("\(filePath).png")
+			
+			return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+		}
+
+		Alamofire.download(url, to: destination).responseData { (response) in
+			guard let dataImage = response.result.value else {
+//				completion(placeholder image)
+				return
+			}
+
+			completion(dataImage)
+		}
 		
 	}
-	
 }
 
 extension URLProvider {
