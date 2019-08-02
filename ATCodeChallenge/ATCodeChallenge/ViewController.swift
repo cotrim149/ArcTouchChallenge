@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 				return
 			}
 			
-			if let baseUrl = imagesConfiguration.base_url {
+			if let baseUrl = imagesConfiguration.secureBaseUrl {
 				URLProvider.baseImage = baseUrl
 			} else {
 				URLProvider.baseImage = "Base url cannot be retrived"
@@ -35,8 +35,17 @@ class ViewController: UIViewController {
 	}
 	
 	func retrieveUpcomingMovies() {
+		let movieDAO = MoviesDAO()
 		
-		MoviesDAO().upcoming(inPage: 1)
+		movieDAO.upcoming(inPage: 1, completionHandler: {
+			(movies) in
+			
+			let imageData = movieDAO.imageMovie(fromMovie: movies?.first, isPoster: true)
+			movies?.first?.posterImageData = imageData
+			
+			
+		})
+		
 	}
 
 }

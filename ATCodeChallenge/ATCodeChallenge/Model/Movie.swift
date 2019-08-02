@@ -10,21 +10,23 @@ import UIKit
 import ObjectMapper
 
 class Movie: Mappable {
-	var vote_count : Int?
+	var voteCount : Int?
 	var id : Int?
 	var video : Bool?
-	var vote_average : Double?
+	var voteAverage : Double?
 	var title : String?
 	var popularity : Double?
-	var poster_path : String?
-	var original_language : String?
-	var original_title : String?
-	var genre_ids : [Int]?
-	var backdrop_path : String?
+	var posterPath : String?
+	var originalLanguage : String?
+	var originalTitle : String?
+	var genreIds : [Int]?
+	var backdropPath : String?
 	var adult : Bool?
 	var overview : String?
-	var release_date : String?
+	var releaseDate : String?
 	
+	var posterImageData : Data?
+	var backdropImageData : Data?
 	
 	required init?(map: Map) {
 		
@@ -32,20 +34,20 @@ class Movie: Mappable {
 	
 	func mapping(map: Map) {
 		
-		vote_count <- map["vote_count"]
+		voteCount <- map["vote_count"]
 		id <- map["id"]
 		video <- map["video"]
-		vote_average <- map["vote_average"]
+		voteAverage <- map["vote_average"]
 		title <- map["title"]
 		popularity <- map["popularity"]
-		poster_path <- map["poster_path"]
-		original_language <- map["original_language"]
-		original_title <- map["original_title"]
-		genre_ids <- map["genre_ids"]
-		backdrop_path <- map["backdrop_path"]
+		posterPath <- map["poster_path"]
+		originalLanguage <- map["original_language"]
+		originalTitle <- map["original_title"]
+		genreIds <- map["genre_ids"]
+		backdropPath <- map["backdrop_path"]
 		adult <- map["adult"]
 		overview <- map["overview"]
-		release_date <- map["release_date"]
+		releaseDate <- map["release_date"]
 	}
 	
 }
