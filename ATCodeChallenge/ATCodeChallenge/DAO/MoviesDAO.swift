@@ -38,7 +38,7 @@ class MoviesDAO: NSObject {
 		var imageSize = ""
 		var filePath = ""
 		if(isPoster) {
-			imageSize = "w300"
+			imageSize = "w150"
 			filePath = movie.posterPath ?? "poster image is empty"
 		} else {
 			imageSize = "w300"
