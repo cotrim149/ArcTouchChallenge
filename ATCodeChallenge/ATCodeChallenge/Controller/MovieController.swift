@@ -10,6 +10,7 @@ import UIKit
 protocol MovieControllerDelegate {
 	func updateUpcomingMovies()
 	func finishUpcomingMovies()
+	
 }
 
 class MovieController: NSObject {
@@ -18,6 +19,7 @@ class MovieController: NSObject {
 	var genresDict = [Int:Genre]()
 	var delegate: MovieControllerDelegate?
 	let movieDAO = MoviesDAO()
+	var currentPage = 0
 
 	func retrieveTMDbConfigurations() {
 		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
@@ -49,14 +51,21 @@ class MovieController: NSObject {
 	}
 	
 	private func updateMovie(movie:Movie) {
-		self.updateImage(movie: movie)
+		self.updatePosterImage(movie: movie)
 		if(genresDict.isEmpty) {
 			retrieveGenres()
 		}
 		self.updateGenres(movie: movie)
 	}
 	
-	private func updateImage(movie:Movie) {
+	/**
+		Updating the poster image from the movie object. If the movie already have that image
+		then the request not happens.
+	*/
+	private func updatePosterImage(movie:Movie) {
+		if (movie.posterImageData != nil) {
+			return
+		}
 		movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
 			(imageData) in
 			
@@ -79,15 +88,25 @@ class MovieController: NSObject {
 
 	}
 	
+	/**
+		Retrive the upcoming movies always incrementing the page number in 1. The method always append the new content to the older content.
+	*/
 	func retrieveUpcomingMovies() {
-
-		movieDAO.upcoming(inPage: 1, completionHandler: {
+		
+		currentPage += 1
+		
+		movieDAO.upcoming(inPage: currentPage, completionHandler: {
 			(movies) in
-			self.movies = movies ?? []
+			
+			if(self.movies.isEmpty) {
+				self.movies = movies ?? []
+			} else {
+				self.movies.append(contentsOf: movies ?? [])
+			}
+			
 			for (_, movie) in self.movies.enumerated() {
 				self.updateMovie(movie: movie)
 			}
-			
 			self.delegate?.finishUpcomingMovies()
 		})
 		

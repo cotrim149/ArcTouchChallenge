@@ -23,9 +23,12 @@ class ViewController: UIViewController {
 		self.movieController.delegate = self
 		self.movieController.retrieveTMDbConfigurations()
 	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		activityIndicator.show(inViewController: self)
+	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		activityIndicator.show(inViewController: self)
 		self.movieController.retrieveUpcomingMovies()
 	}
 	
@@ -72,8 +75,21 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 			return 390.0
 		}
 	}
+
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		
+		let offsetY = scrollView.contentOffset.y
+		let contentHeight = scrollView.contentSize.height
+		
+		if offsetY > contentHeight - scrollView.frame.size.height {
+			activityIndicator.show(inViewController: self)
+			self.movieController.retrieveUpcomingMovies()
+		}
+		
+	}
 	
 }
+
 
 extension ViewController {
 	private func produceGenresString(movie:Movie) -> String {

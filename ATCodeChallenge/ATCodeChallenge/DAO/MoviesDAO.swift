@@ -17,7 +17,11 @@ class MoviesDAO: NSObject {
 		let apiKey = URLProvider.apiKey
 		let language = "en-US"
 		
-		let url = URLProvider.upcomingMovies(withApiKey: apiKey, language: language, forPage: page)
+		guard let url = URLProvider.upcomingMovies(withApiKey: apiKey, language: language, forPage: page) else {
+			completion([])
+			return
+		}
+		
 		Alamofire.request(url).responseObject { (response: DataResponse<UpcomingMovies>) in
 
 			guard let upcomingMovies = response.result.value else {
@@ -46,7 +50,10 @@ class MoviesDAO: NSObject {
 			filePath = movie.backdropPath ?? "backdrop image is empty"
 		}
 		
-		let url = URLProvider.imageMovie(withSize: imageSize, inFilePath: filePath)
+		guard let url = URLProvider.imageMovie(withSize: imageSize, inFilePath: filePath) else {
+			completion(Data())
+			return
+		}
 
 		let destination: DownloadRequest.DownloadFileDestination = { _, _ in
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -71,7 +78,10 @@ class MoviesDAO: NSObject {
 		let apiKey = URLProvider.apiKey
 		let language = "en-US"
 
-		let url = URLProvider.genresMovie(withApiKey: apiKey, language: language)
+		guard let url = URLProvider.genresMovie(withApiKey: apiKey, language: language) else {
+			return []
+		}
+		
 		let response = Alamofire.request(url).responseJSON()
 		var genres:[Genre] = []
 
@@ -93,28 +103,28 @@ class MoviesDAO: NSObject {
 
 extension URLProvider {
 	
-	static func upcomingMovies(withApiKey apiKey:String, language:String, forPage page:Int) -> URL {
+	static func upcomingMovies(withApiKey apiKey:String, language:String, forPage page:Int) -> URL? {
 		
 		guard let url = URL(string: URLProvider.baseMovies.appending("/upcoming?api_key=\(apiKey)&language=\(language)&page=\(page)")) else {
 			
-			return URL(string: "UpcomingMovies URL cannot be instancied")!
+			return URL(string: "UpcomingMovies URL cannot be instancied")
 		}
 		
 		return url
 	}
 	
-	static func imageMovie(withSize size: String, inFilePath filePath: String) -> URL {
+	static func imageMovie(withSize size: String, inFilePath filePath: String) -> URL? {
 		guard let url = URL(string: URLProvider.baseImage.appending("\(size)\(filePath)")) else {
-			return URL(string: "ImageMovie URL cannot be instancied")!
+			return URL(string: "ImageMovie URL cannot be instancied")
 		}
 		
 		return url
 	}
 	
-	static func genresMovie(withApiKey apiKey:String, language:String) -> URL {
+	static func genresMovie(withApiKey apiKey:String, language:String) -> URL? {
 		guard let url = URL(string: URLProvider.baseGenres.appending("?api_key=\(apiKey)&language=\(language)")) else {
 			
-			return URL(string: "GenresMovies URL cannot be instancied")!
+			return URL(string: "GenresMovies URL cannot be instancied")
 		}
 		
 		return url
