@@ -82,6 +82,7 @@
                                             <outlet property="genresLabel" destination="feM-WH-Yhg" id="BF1-It-ANq"/>
                                             <outlet property="movieTitleLabel" destination="ImO-1c-1g7" id="8w9-2i-7cm"/>
                                             <outlet property="posterImageView" destination="INZ-ig-Tba" id="Geo-bn-Svv"/>
+                                            <outlet property="releaseDateLabel" destination="aqc-Mc-n8E" id="IVh-zf-iNF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

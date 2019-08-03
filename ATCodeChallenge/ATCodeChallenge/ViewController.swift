@@ -54,14 +54,13 @@ class ViewController: UIViewController {
 
 			self.movies = movies ?? []
 
-			for (index, movie) in self.movies.enumerated() {
+			for (_, movie) in self.movies.enumerated() {
 
 				movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
 					(imageData) in
 					
 					movie.posterImageData = imageData
 					self.tableView.reloadData()
-					print("Image of \(String(describing: movie.title)): \(imageData) load!")
 //					self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
 					
 				})
@@ -94,6 +93,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 			movieCell.posterImageView.image = UIImage(data: posterImageData)
 		}
 		
+		movieCell.releaseDateLabel.text = movie.releaseDate
 		return movieCell
 	}
 	
