@@ -28,6 +28,10 @@ class ViewController: UIViewController {
 		self.retrieveUpcomingMovies()
 	}
 	
+	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+		self.tableView.reloadData()
+	}
+	
 	func retrieveTMDbConfigurations() {
 		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
 			(configuration) in
@@ -73,6 +77,20 @@ class ViewController: UIViewController {
 	}
 
 }
+extension ViewController {
+	func setupMovieCellPortrait(tableView:UITableView, indexPath:IndexPath) -> MovieCell{
+		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+		let movie = self.movies[indexPath.row]
+		movieCell.movieTitleLabel.text = movie.title
+		
+		if let posterImageData = movie.posterImageData {
+			movieCell.posterImageView.image = UIImage(data: posterImageData)
+		}
+		
+		movieCell.releaseDateLabel.text = movie.releaseDate
+		return movieCell
+	}
+}
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,16 +103,12 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-		let movie = self.movies[indexPath.row]
-		movieCell.movieTitleLabel.text = movie.title
-
-		if let posterImageData = movie.posterImageData {
-			movieCell.posterImageView.image = UIImage(data: posterImageData)
+		if(UIApplication.shared.statusBarOrientation.isPortrait) {
+			return self.setupMovieCellPortrait(tableView: tableView, indexPath: indexPath)
+		} else {
+			return UITableViewCell()
 		}
-		
-		movieCell.releaseDateLabel.text = movie.releaseDate
-		return movieCell
+
 	}
 	
 	
