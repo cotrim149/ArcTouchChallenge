@@ -52,6 +52,13 @@ extension ViewController {
 		}
 		
 		movieCell.releaseDateLabel.text = movie.releaseDate
+		
+		var genresText = ""
+		for genre in movie.genres {
+			genresText = "\(genresText) \(genre)"
+		}
+		movieCell.genresLabel.text = genresText
+		
 		return movieCell
 	}
 	
@@ -89,8 +96,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 		} else {
 			return self.setupMovieCellLandscape(tableView: tableView, indexPath: indexPath)
 		}
-
 	}
 	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if(UIApplication.shared.statusBarOrientation.isPortrait) {
+			return 410.0
+		} else {
+			return 390.0
+		}
+	}
 	
 }
