@@ -41,6 +41,14 @@ extension ViewController: MovieControllerDelegate {
 }
 
 extension ViewController {
+	private func produceGenresString(movie:Movie) -> String {
+		var genresText = ""
+		for genre in movie.genres {
+			genresText = "\(genresText) \(genre)"
+		}
+		return genresText
+	}
+	
 	func setupMovieCellPortrait(tableView:UITableView, indexPath:IndexPath) -> MovieCell{
 		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
 		
@@ -53,11 +61,7 @@ extension ViewController {
 		
 		movieCell.releaseDateLabel.text = movie.releaseDate
 		
-		var genresText = ""
-		for genre in movie.genres {
-			genresText = "\(genresText) \(genre)"
-		}
-		movieCell.genresLabel.text = genresText
+		movieCell.genresLabel.text = self.produceGenresString(movie: movie)
 		
 		return movieCell
 	}
@@ -73,6 +77,8 @@ extension ViewController {
 		}
 		
 		movieCell.releaseDateLabel.text = movie.releaseDate
+		
+		movieCell.genresLabel.text = self.produceGenresString(movie: movie)
 		
 		movieCell.movieOverviewLabel.text = movie.overview
 		
