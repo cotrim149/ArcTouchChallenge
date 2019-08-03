@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import Alamofire_Synchronous
 
 class MoviesDAO: NSObject {
 	
@@ -65,6 +66,29 @@ class MoviesDAO: NSObject {
 		}
 		
 	}
+	
+	func genres() -> [Genre]{
+		let apiKey = URLProvider.apiKey
+		let language = "en-US"
+
+		let url = URLProvider.genresMovie(withApiKey: apiKey, language: language)
+		let response = Alamofire.request(url).responseJSON()
+		var genres:[Genre] = []
+
+		if let genresJson:[String:[Any]] = response.result.value as? [String:[Any]]{
+			
+			let genresArrayJson = genresJson["genres"] as? [[String:Any]]
+			
+			for genreJson in genresArrayJson! {
+				if let genre = Genre(JSON: genreJson){
+					genres.append(genre)
+				}
+			}
+
+		}
+		
+		return genres
+	}
 }
 
 extension URLProvider {
@@ -82,6 +106,15 @@ extension URLProvider {
 	static func imageMovie(withSize size: String, inFilePath filePath: String) -> URL {
 		guard let url = URL(string: URLProvider.baseImage.appending("\(size)\(filePath)")) else {
 			return URL(string: "ImageMovie URL cannot be instancied")!
+		}
+		
+		return url
+	}
+	
+	static func genresMovie(withApiKey apiKey:String, language:String) -> URL {
+		guard let url = URL(string: URLProvider.baseGenres.appending("?api_key=\(apiKey)&language=\(language)")) else {
+			
+			return URL(string: "GenresMovies URL cannot be instancied")!
 		}
 		
 		return url

@@ -11,76 +11,41 @@ import UIKit
 class ViewController: UIViewController {
 
 	@IBOutlet weak var tableView: UITableView!
-	
-	var movies : [Movie] = []
+	var movieController:MovieController!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.dataSource = self
 		tableView.delegate = self
-		
-//		tableView.register(UINib(nibName: "MovieCell", bundle: nil), forCellReuseIdentifier: "MovieCell")
 
-		self.retrieveTMDbConfigurations()
+		self.movieController = MovieController()
+		self.movieController.delegate = self
+		self.movieController.retrieveTMDbConfigurations()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
-		self.retrieveUpcomingMovies()
+		self.movieController.retrieveGenres()
+		self.movieController.retrieveUpcomingMovies()
 	}
 	
 	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 		self.tableView.reloadData()
 	}
 	
-	func retrieveTMDbConfigurations() {
-		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
-			(configuration) in
-			
-			guard let imagesConfiguration = configuration.images else {
-				return
-			}
-			
-			if let baseUrl = imagesConfiguration.secureBaseUrl {
-				URLProvider.baseImage = baseUrl
-			} else {
-				URLProvider.baseImage = "Base url cannot be retrived"
-			}
-			
-			
-		})
-	}
-	
-	func retrieveUpcomingMovies() {
-		let movieDAO = MoviesDAO()
-		
-		movieDAO.upcoming(inPage: 1, completionHandler: {
-			(movies) in
-
-			self.movies = movies ?? []
-
-			for (_, movie) in self.movies.enumerated() {
-
-				movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
-					(imageData) in
-					
-					movie.posterImageData = imageData
-					self.tableView.reloadData()
-//					self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-					
-				})
-			}
-		
-
-			
-		})
-		
-	}
 
 }
+
+extension ViewController: MovieControllerDelegate {
+	func updateUpcomingMovies() {
+		self.tableView.reloadData()
+	}
+}
+
 extension ViewController {
 	func setupMovieCellPortrait(tableView:UITableView, indexPath:IndexPath) -> MovieCell{
 		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-		let movie = self.movies[indexPath.row]
+		
+		let movie = self.movieController.movies[indexPath.row]
 		movieCell.movieTitleLabel.text = movie.title
 		
 		if let posterImageData = movie.posterImageData {
@@ -94,7 +59,7 @@ extension ViewController {
 	func setupMovieCellLandscape(tableView:UITableView, indexPath:IndexPath) -> MovieCellLandscape {
 		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCellLandscape", for: indexPath) as! MovieCellLandscape
 		
-		let movie = self.movies[indexPath.row]
+		let movie = self.movieController.movies[indexPath.row]
 		movieCell.movieTitleLabel.text = movie.title
 		
 		if let posterImageData = movie.posterImageData {
@@ -111,7 +76,7 @@ extension ViewController {
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.movies.count
+		return self.movieController.movies.count
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {

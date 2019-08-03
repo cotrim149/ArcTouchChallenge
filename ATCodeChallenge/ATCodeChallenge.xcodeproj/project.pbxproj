@@ -23,6 +23,8 @@
 		9F5E8EF722F39AB2005CD65E /* TMDbConfigurationsDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EF622F39AB2005CD65E /* TMDbConfigurationsDAO.swift */; };
 		9F5E8EFB22F4F3DF005CD65E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EF922F4F3DE005CD65E /* MovieCell.swift */; };
 		9F5E8EFF22F59EA6005CD65E /* MovieCellLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EFE22F59EA6005CD65E /* MovieCellLandscape.swift */; };
+		9F5E8F0122F5A775005CD65E /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8F0022F5A775005CD65E /* Genre.swift */; };
+		9F5E8F0422F5ACA8005CD65E /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8F0322F5ACA8005CD65E /* MovieController.swift */; };
 		B569F1A9983A16E3AD3D891E /* Pods_ATCodeChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8673B6E80355B0D04F57A37D /* Pods_ATCodeChallengeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		9F5E8EF622F39AB2005CD65E /* TMDbConfigurationsDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbConfigurationsDAO.swift; sourceTree = "<group>"; };
 		9F5E8EF922F4F3DE005CD65E /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		9F5E8EFE22F59EA6005CD65E /* MovieCellLandscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellLandscape.swift; sourceTree = "<group>"; };
+		9F5E8F0022F5A775005CD65E /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		9F5E8F0322F5ACA8005CD65E /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
 		D0CA9DD0212D4506B7261484 /* Pods-ATCodeChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATCodeChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ATCodeChallengeTests/Pods-ATCodeChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +120,7 @@
 		9F5E8EC422F263C3005CD65E /* ATCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				9F5E8F0222F5AC91005CD65E /* Controller */,
 				9F5E8EF822F4F3C1005CD65E /* View */,
 				9F5E8EED22F280DD005CD65E /* Model */,
 				9F5E8EE622F26D16005CD65E /* DAO */,
@@ -163,6 +168,7 @@
 				9F5E8EF022F392A3005CD65E /* UpcomingMovies.swift */,
 				9F5E8EF222F399B2005CD65E /* Configuration.swift */,
 				9F5E8EF422F39A27005CD65E /* MovieImageConfiguration.swift */,
+				9F5E8F0022F5A775005CD65E /* Genre.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,6 +188,14 @@
 				9F5E8EFE22F59EA6005CD65E /* MovieCellLandscape.swift */,
 			);
 			path = MovieCell;
+			sourceTree = "<group>";
+		};
+		9F5E8F0222F5AC91005CD65E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9F5E8F0322F5ACA8005CD65E /* MovieController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		DBA64B7E8252E0E096BEE84C /* Pods */ = {
@@ -366,12 +380,14 @@
 				9F5E8EF722F39AB2005CD65E /* TMDbConfigurationsDAO.swift in Sources */,
 				9F5E8EC822F263C3005CD65E /* ViewController.swift in Sources */,
 				9F5E8EEC22F27531005CD65E /* MoviesDAO.swift in Sources */,
+				9F5E8F0122F5A775005CD65E /* Genre.swift in Sources */,
 				9F5E8EFF22F59EA6005CD65E /* MovieCellLandscape.swift in Sources */,
 				9F5E8EF322F399B2005CD65E /* Configuration.swift in Sources */,
 				9F5E8EF522F39A27005CD65E /* MovieImageConfiguration.swift in Sources */,
 				9F5E8EC622F263C3005CD65E /* AppDelegate.swift in Sources */,
 				9F5E8EE822F26D85005CD65E /* URLProvider.swift in Sources */,
 				9F5E8EF122F392A3005CD65E /* UpcomingMovies.swift in Sources */,
+				9F5E8F0422F5ACA8005CD65E /* MovieController.swift in Sources */,
 				9F5E8EFB22F4F3DF005CD65E /* MovieCell.swift in Sources */,
 				9F5E8EEF22F280F1005CD65E /* Movie.swift in Sources */,
 			);

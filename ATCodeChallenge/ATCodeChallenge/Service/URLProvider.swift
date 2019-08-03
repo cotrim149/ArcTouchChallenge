@@ -16,5 +16,5 @@ class URLProvider: NSObject {
 	static var baseImage = ""
 	
 	static let baseMovies = "\(base)/movie"
-	
+	static let baseGenres = "\(base)/genre/movie/list"
 }
