@@ -27,7 +27,7 @@ class Movie: Mappable {
 	
 	var posterImageData : Data?
 	var backdropImageData : Data?
-	var genres:[String]?
+	var genres:[String]!
 	
 	required init?(map: Map) {
 		

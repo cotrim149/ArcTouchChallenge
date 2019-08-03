@@ -14,9 +14,10 @@ protocol MovieControllerDelegate {
 class MovieController: NSObject {
 
 	var movies : [Movie] = []
-
+	var genresDict = [Int:Genre]()
 	var delegate: MovieControllerDelegate?
-	
+	let movieDAO = MoviesDAO()
+
 	func retrieveTMDbConfigurations() {
 		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
 			(configuration) in
@@ -35,30 +36,56 @@ class MovieController: NSObject {
 		})
 	}
 	
-	func retrieveGenres() {
+	private func retrieveGenres() {
+		let genres = movieDAO.genres()
 		
-		MoviesDAO().genres()
+		for genre in genres {
+			if let key = genre.id {
+				genresDict[key] = genre
+			}
+		}
+		
+	}
+	
+	private func updateMovie(movie:Movie) {
+		self.updateImage(movie: movie)
+		if(genresDict.isEmpty) {
+			retrieveGenres()
+		}
+		self.updateGenres(movie: movie)
+	}
+	
+	private func updateImage(movie:Movie) {
+		movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
+			(imageData) in
+			
+			movie.posterImageData = imageData
+			self.delegate?.updateUpcomingMovies()
+			
+		})
+	}
+	
+	private func updateGenres(movie:Movie) {
+		if let genresId = movie.genreIds {
+			var genresString:[String?] = [String?]()
+			
+			for genreId in genresId {
+				let genre = genresDict[genreId]
+				genresString.append(genre?.name)
+			}
+			movie.genres = genresString as? [String]
+		}
+
 	}
 	
 	func retrieveUpcomingMovies() {
-		let movieDAO = MoviesDAO()
+
 		movieDAO.upcoming(inPage: 1, completionHandler: {
 			(movies) in
-			
 			self.movies = movies ?? []
-			
 			for (_, movie) in self.movies.enumerated() {
-				
-				movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
-					(imageData) in
-					
-					movie.posterImageData = imageData
-					self.delegate?.updateUpcomingMovies()
-					
-				})
+				self.updateMovie(movie: movie)
 			}
-			
-			
 		})
 		
 	}

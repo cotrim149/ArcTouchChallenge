@@ -24,7 +24,6 @@ class ViewController: UIViewController {
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
-		self.movieController.retrieveGenres()
 		self.movieController.retrieveUpcomingMovies()
 	}
 	
