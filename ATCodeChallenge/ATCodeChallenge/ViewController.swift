@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
 	@IBOutlet weak var tableView: UITableView!
+	
+	var movies : [Movie] = []
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.dataSource = self
@@ -48,13 +51,23 @@ class ViewController: UIViewController {
 		
 		movieDAO.upcoming(inPage: 1, completionHandler: {
 			(movies) in
-			
-			movieDAO.imageMovie(fromMovie: movies?.first, isPoster: true, completionHandler: {
-				(imageData) in
-				
-				movies?.first?.posterImageData = imageData
 
-			})
+			self.movies = movies ?? []
+
+			for (index, movie) in self.movies.enumerated() {
+
+				movieDAO.imageMovie(fromMovie: movie, isPoster: true, completionHandler: {
+					(imageData) in
+					
+					movie.posterImageData = imageData
+					self.tableView.reloadData()
+					print("Image of \(String(describing: movie.title)): \(imageData) load!")
+//					self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+					
+				})
+			}
+		
+
 			
 		})
 		
@@ -64,7 +77,7 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
+		return self.movies.count
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,8 +86,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
+		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+		let movie = self.movies[indexPath.row]
+		movieCell.movieTitleLabel.text = movie.title
 
+		if let posterImageData = movie.posterImageData {
+			movieCell.posterImageView.image = UIImage(data: posterImageData)
+		}
+		
 		return movieCell
 	}
 	

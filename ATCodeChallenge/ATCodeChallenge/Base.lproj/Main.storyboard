@@ -78,6 +78,11 @@
                                                 <constraint firstItem="feM-WH-Yhg" firstAttribute="top" secondItem="INZ-ig-Tba" secondAttribute="bottom" constant="10" id="bc7-Rf-rT9"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="genresLabel" destination="feM-WH-Yhg" id="BF1-It-ANq"/>
+                                            <outlet property="movieTitleLabel" destination="ImO-1c-1g7" id="8w9-2i-7cm"/>
+                                            <outlet property="posterImageView" destination="INZ-ig-Tba" id="Geo-bn-Svv"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
