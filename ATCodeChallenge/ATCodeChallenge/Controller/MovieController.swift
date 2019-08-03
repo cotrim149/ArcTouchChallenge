@@ -9,6 +9,7 @@
 import UIKit
 protocol MovieControllerDelegate {
 	func updateUpcomingMovies()
+	func finishUpcomingMovies()
 }
 
 class MovieController: NSObject {
@@ -86,6 +87,8 @@ class MovieController: NSObject {
 			for (_, movie) in self.movies.enumerated() {
 				self.updateMovie(movie: movie)
 			}
+			
+			self.delegate?.finishUpcomingMovies()
 		})
 		
 	}

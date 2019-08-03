@@ -12,18 +12,20 @@ class ViewController: UIViewController {
 
 	@IBOutlet weak var tableView: UITableView!
 	var movieController:MovieController!
+	let activityIndicator = ActivityIndicator()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.dataSource = self
 		tableView.delegate = self
-
+		
 		self.movieController = MovieController()
 		self.movieController.delegate = self
 		self.movieController.retrieveTMDbConfigurations()
 	}
-
+	
 	override func viewDidAppear(_ animated: Bool) {
+		activityIndicator.show(inViewController: self)
 		self.movieController.retrieveUpcomingMovies()
 	}
 	
@@ -35,9 +37,42 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: MovieControllerDelegate {
+	func finishUpcomingMovies() {
+		self.activityIndicator.hide()
+	}
+	
 	func updateUpcomingMovies() {
 		self.tableView.reloadData()
 	}
+	
+}
+
+extension ViewController : UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.movieController.movies.count
+	}
+	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		if(UIApplication.shared.statusBarOrientation.isPortrait) {
+			return self.setupMovieCellPortrait(tableView: tableView, indexPath: indexPath)
+		} else {
+			return self.setupMovieCellLandscape(tableView: tableView, indexPath: indexPath)
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if(UIApplication.shared.statusBarOrientation.isPortrait) {
+			return 410.0
+		} else {
+			return 390.0
+		}
+	}
+	
 }
 
 extension ViewController {
@@ -84,32 +119,4 @@ extension ViewController {
 		
 		return movieCell
 	}
-}
-
-extension ViewController : UITableViewDelegate, UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.movieController.movies.count
-	}
-	
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		if(UIApplication.shared.statusBarOrientation.isPortrait) {
-			return self.setupMovieCellPortrait(tableView: tableView, indexPath: indexPath)
-		} else {
-			return self.setupMovieCellLandscape(tableView: tableView, indexPath: indexPath)
-		}
-	}
-	
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if(UIApplication.shared.statusBarOrientation.isPortrait) {
-			return 410.0
-		} else {
-			return 390.0
-		}
-	}
-	
 }
