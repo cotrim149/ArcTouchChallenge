@@ -90,6 +90,23 @@ extension ViewController {
 		movieCell.releaseDateLabel.text = movie.releaseDate
 		return movieCell
 	}
+	
+	func setupMovieCellLandscape(tableView:UITableView, indexPath:IndexPath) -> MovieCellLandscape {
+		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCellLandscape", for: indexPath) as! MovieCellLandscape
+		
+		let movie = self.movies[indexPath.row]
+		movieCell.movieTitleLabel.text = movie.title
+		
+		if let posterImageData = movie.posterImageData {
+			movieCell.posterImageView.image = UIImage(data: posterImageData)
+		}
+		
+		movieCell.releaseDateLabel.text = movie.releaseDate
+		
+		movieCell.movieOverviewLabel.text = movie.overview
+		
+		return movieCell
+	}
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
@@ -106,7 +123,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 		if(UIApplication.shared.statusBarOrientation.isPortrait) {
 			return self.setupMovieCellPortrait(tableView: tableView, indexPath: indexPath)
 		} else {
-			return UITableViewCell()
+			return self.setupMovieCellLandscape(tableView: tableView, indexPath: indexPath)
 		}
 
 	}
