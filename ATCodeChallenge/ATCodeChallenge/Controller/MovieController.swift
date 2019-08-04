@@ -10,7 +10,7 @@ import UIKit
 protocol MovieControllerDelegate {
 	func updateUpcomingMovies()
 	func finishUpcomingMovies()
-	
+	func selectedMovie() -> Int
 }
 
 class MovieController: NSObject {
@@ -20,7 +20,8 @@ class MovieController: NSObject {
 	var delegate: MovieControllerDelegate?
 	let movieDAO = MoviesDAO()
 	var currentPage = 0
-
+	
+	// MARK: - Retrieve methods
 	func retrieveTMDbConfigurations() {
 		TMDbConfigurationsDAO().retrieveConfigurations(completionHandler: {
 			(configuration) in
@@ -50,6 +51,34 @@ class MovieController: NSObject {
 		
 	}
 	
+	/**
+		Retrive the upcoming movies always incrementing the page number in 1. The method always append the new content to the older content.
+	*/
+	func retrieveUpcomingMovies() {
+		
+		currentPage += 1
+		
+		movieDAO.upcoming(inPage: currentPage, completionHandler: {
+			(movies) in
+			
+			if(self.movies.isEmpty) {
+				self.movies = movies ?? []
+			} else {
+				self.movies.append(contentsOf: movies ?? [])
+			}
+			
+			for (_, movie) in self.movies.enumerated() {
+				self.updateMovie(movie: movie)
+			}
+			self.delegate?.finishUpcomingMovies()
+		})
+		
+	}
+}
+
+//	MARK: - Update methods
+extension MovieController {
+
 	private func updateMovie(movie:Movie) {
 		self.updatePosterImage(movie: movie)
 		if(genresDict.isEmpty) {
@@ -59,8 +88,8 @@ class MovieController: NSObject {
 	}
 	
 	/**
-		Updating the poster image from the movie object. If the movie already have that image
-		then the request not happens.
+	Updating the poster image from the movie object. If the movie already have that image
+	then the request not happens.
 	*/
 	private func updatePosterImage(movie:Movie) {
 		if (movie.posterImageData != nil) {
@@ -85,30 +114,6 @@ class MovieController: NSObject {
 			}
 			movie.genres = genresString as? [String]
 		}
-
-	}
-	
-	/**
-		Retrive the upcoming movies always incrementing the page number in 1. The method always append the new content to the older content.
-	*/
-	func retrieveUpcomingMovies() {
-		
-		currentPage += 1
-		
-		movieDAO.upcoming(inPage: currentPage, completionHandler: {
-			(movies) in
-			
-			if(self.movies.isEmpty) {
-				self.movies = movies ?? []
-			} else {
-				self.movies.append(contentsOf: movies ?? [])
-			}
-			
-			for (_, movie) in self.movies.enumerated() {
-				self.updateMovie(movie: movie)
-			}
-			self.delegate?.finishUpcomingMovies()
-		})
 		
 	}
 }

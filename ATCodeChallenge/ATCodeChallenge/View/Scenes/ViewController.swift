@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
 	var movieController:MovieController!
 	let activityIndicator = ActivityIndicator()
+	var selectedMovieIndex = -1
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,10 +23,13 @@ class ViewController: UIViewController {
 		self.movieController = MovieController()
 		self.movieController.delegate = self
 		self.movieController.retrieveTMDbConfigurations()
+		
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		activityIndicator.show(inViewController: self)
+		if (self.movieController.movies.isEmpty) {
+			activityIndicator.show(inViewController: self)
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -36,10 +40,25 @@ class ViewController: UIViewController {
 		self.tableView.reloadData()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
+		if (segue.identifier == "DetailScreenSegue") {
+			let destinationVC = segue.destination as? DetailMovieViewController
+			let indexPathSelectedRow = self.tableView.indexPathForSelectedRow
+			if let index = indexPathSelectedRow?.row {
+				let movie = movieController.movies[index]
+				destinationVC?.movie = movie
+			}
+		}
+		
+	}
 }
 
 extension ViewController: MovieControllerDelegate {
+	func selectedMovie() -> Int {
+		return self.selectedMovieIndex
+	}
+	
 	func finishUpcomingMovies() {
 		self.activityIndicator.hide()
 	}
@@ -47,6 +66,7 @@ extension ViewController: MovieControllerDelegate {
 	func updateUpcomingMovies() {
 		self.tableView.reloadData()
 	}
+	
 	
 }
 
@@ -75,7 +95,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 			return 390.0
 		}
 	}
-
+	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		
 		let offsetY = scrollView.contentOffset.y
