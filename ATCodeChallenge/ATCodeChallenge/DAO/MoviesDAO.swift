@@ -22,12 +22,12 @@ class MoviesDAO: NSObject {
 			return
 		}
 		
+		
 		Alamofire.request(url).responseObject { (response: DataResponse<UpcomingMovies>) in
 
 			guard let upcomingMovies = response.result.value else {
 				return
 			}
-			
 			completion(upcomingMovies.movies)
 
 		}
@@ -76,7 +76,8 @@ class MoviesDAO: NSObject {
 		let destination: DownloadRequest.DownloadFileDestination = { _, _ in
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			let documentsURL = URL(fileURLWithPath: documentsPath, isDirectory: true)
-			let fileURL = documentsURL.appendingPathComponent("\(filePath).png")
+			let fileName = filePath.dropFirst()
+			let fileURL = documentsURL.appendingPathComponent("\(fileName)")
 			
 			return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
 		}
