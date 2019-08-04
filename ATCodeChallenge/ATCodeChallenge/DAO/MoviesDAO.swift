@@ -33,11 +33,28 @@ class MoviesDAO: NSObject {
 		}
 	}
 	
+	func details(withMovieId movieId: Int, completionHandler completion: @escaping (_ movie: Movie)->Void) -> DataRequest? {
+		let apiKey = URLProvider.apiKey
+		let language = "en-US"
+		
+		guard let url = URLProvider.detailMovie(withApiKey: apiKey, movieId: movieId, language: language) else {
+			return nil
+		}
 
-	func imageMovie(fromMovie: Movie?, isPoster: Bool, completionHandler completion: @escaping (_ imageData: Data)->Void) {
+		return Alamofire.request(url).responseObject { (response:DataResponse<Movie>) in
+			guard let movie = response.result.value else {
+				return
+			}
+			
+			completion(movie)
+		}
+		
+	}
+
+	func imageMovie(fromMovie: Movie?, isPoster: Bool, completionHandler completion: @escaping (_ imageData: Data)->Void) -> DownloadRequest?{
 		
 		guard let movie = fromMovie else {
-			return
+			return nil
 		}
 		
 		var imageSize = ""
@@ -51,8 +68,9 @@ class MoviesDAO: NSObject {
 		}
 		
 		guard let url = URLProvider.imageMovie(withSize: imageSize, inFilePath: filePath) else {
+//				completion(placeholder image)
 			completion(Data())
-			return
+			return nil
 		}
 
 		let destination: DownloadRequest.DownloadFileDestination = { _, _ in
@@ -63,7 +81,7 @@ class MoviesDAO: NSObject {
 			return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
 		}
 
-		Alamofire.download(url, to: destination).responseData { (response) in
+		let dataRequest = Alamofire.download(url, to: destination).responseData { (response) in
 			guard let dataImage = response.result.value else {
 //				completion(placeholder image)
 				return
@@ -72,6 +90,7 @@ class MoviesDAO: NSObject {
 			completion(dataImage)
 		}
 		
+		return dataRequest
 	}
 	
 	func genres() -> [Genre]{
@@ -111,6 +130,16 @@ extension URLProvider {
 		}
 		
 		return url
+	}
+	
+	static func detailMovie(withApiKey apiKey: String, movieId: Int, language: String) -> URL? {
+		
+		guard let url = URL(string: URLProvider.baseMovies.appending("/\(movieId)?api_key=\(apiKey)&language=\(language)")) else {
+			return URL(string:"DetailMovie URL cannot be instacied")
+		}
+		
+		return url
+		
 	}
 	
 	static func imageMovie(withSize size: String, inFilePath filePath: String) -> URL? {

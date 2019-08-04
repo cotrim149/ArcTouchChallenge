@@ -10,31 +10,51 @@ import UIKit
 import ObjectMapper
 
 class Movie: Mappable {
-	var voteCount : Int?
+
+	// MARK:- Upcoming movie
+	var adult : Bool?
+	var backdropPath : String?
+	var genreIds : [Int]?
 	var id : Int?
-	var video : Bool?
-	var voteAverage : Double?
-	var title : String?
-	var popularity : Double?
-	var posterPath : String?
 	var originalLanguage : String?
 	var originalTitle : String?
-	var genreIds : [Int]?
-	var backdropPath : String?
-	var adult : Bool?
 	var overview : String?
+	var popularity : Double?
+	var posterPath : String?
 	var releaseDate : String?
+	var title : String?
+	var video : Bool?
+	var voteAverage : Double?
+	var voteCount : Int?
 	
+	// MARK:- Details
+	var belongsToCollection : String?
+	var budget : Int?
+	var homepage : String?
+	var imdbId : String?
+	var productionCompanies : [ProductionCompanies]?
+	var productionCountries : [String]?
+	var revenue : Int?
+	var runtime : Int?
+	var spokenLanguages : [SpokenLanguages]?
+	var status : String?
+	var tagline : String?
+	
+	// MARK:- Custom variables
 	var posterImageData : Data?
 	var backdropImageData : Data?
 	var genres:[String]!
+	
+	init() {
+	}
 	
 	required init?(map: Map) {
 		
 	}
 	
 	func mapping(map: Map) {
-		
+
+		// upcoming movie
 		voteCount <- map["vote_count"]
 		id <- map["id"]
 		video <- map["video"]
@@ -49,25 +69,52 @@ class Movie: Mappable {
 		adult <- map["adult"]
 		overview <- map["overview"]
 		releaseDate <- map["release_date"]
+		
+		// details
+		belongsToCollection <- map["belongs_to_collection"]
+		budget <- map["budget"]
+		homepage <- map["homepage"]
+		imdbId <- map["imdb_id"]
+		productionCompanies <- map["production_companies"]
+		productionCountries <- map["production_countries"]
+		revenue <- map["revenue"]
+		runtime <- map["runtime"]
+		spokenLanguages <- map["spoken_languages"]
+		status <- map["status"]
+		tagline <- map["tagline"]
+		
 	}
 	
 }
 
 //{
-//	vote_count: 28,
-//	id: 384018,
-//	video: false,
-//	vote_average: 6.7,
-//	title: "Velozes & Furiosos: Hobbs & Shaw",
-//	popularity: 109.277,
-//	poster_path: "/keym7MPn1icW1wWfzMnW3HeuzWU.jpg",
-//	original_language: "en",
-//	original_title: "Fast & Furious Presents: Hobbs & Shaw",
-//	genre_ids: [
-//	28
+//	"belongs_to_collection": null,
+//	"budget": 200000000,
+//	"homepage": "https://www.hobbsandshawmovie.com",
+//	"imdb_id": "tt6806448",
+//	"production_companies": [
+//	{
+//	"id": 33,
+//	"logo_path": "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
+//	"name": "Universal Pictures",
+//	"origin_country": "US"
+//	}
 //	],
-//	backdrop_path: "/fgPZgeqxDKIw86pBiAyLhh0vTrU.jpg",
-//	adult: false,
-//	overview: "Desde que se conheceram, em "Velozes & Furiosos 7", Luke Hobbs (Dwayne Johnson) e Deckard Shaw (Jason Statham) constantemente bateram de frente, não só por inicialmente estarem em lados opostos mas, especialmente, pela personalidade de cada um. Agora, a dupla precisa unir forças para enfrentar Brixton (Idris Elba), um anarquista alterado geneticamente que se tornou uma ameaça biológica global. Para tanto, eles contam com a ajuda de Hattie (Vanessa Kirby), irmã de Shaw, que é também agente do MI6, o serviço secreto britânico.",
-//	release_date: "2019-08-01"
+//	"production_countries": [],
+//	"release_date": "2019-08-01",
+//	"revenue": 0,
+//	"runtime": 133,
+//	"spoken_languages": [
+//	{
+//	"iso_639_1": "en",
+//	"name": "English"
+//	},
+//	{
+//	"iso_639_1": "it",
+//	"name": "Italiano"
+//	}
+//	],
+//	"status": "Released",
+//	"tagline": "",
+//	"vote_count": 150
 //}
