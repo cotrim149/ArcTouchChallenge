@@ -15,6 +15,8 @@ class DetailMovieViewController: UIViewController {
 	let activityIndicator = ActivityIndicator()
 
 	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var navigationTitle: UINavigationItem!
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		controller.delegate = self
@@ -25,6 +27,7 @@ class DetailMovieViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		activityIndicator.show(inViewController: self)
 		controller.retrieveDetail(ofMovie: movie)
+		navigationTitle.title = movie?.title
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
