@@ -33,7 +33,9 @@ class ViewController: UIViewController {
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		self.movieController.retrieveUpcomingMovies()
+		if (self.movieController.movies.isEmpty) {
+			self.movieController.retrieveUpcomingMovies()
+		}
 	}
 	
 	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
