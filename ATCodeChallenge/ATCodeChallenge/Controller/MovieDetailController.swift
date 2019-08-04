@@ -30,7 +30,7 @@ class MovieDetailController: NSObject {
 		let movieDetailRequest = movieDAO.details(withMovieId: movieId, completionHandler: {
 			movie in
 			
-			self.delegate?.updateMovie(movie: movie)
+			self.retrieveBackdropImage(fromMovie: movie)
 			
 		})
 		

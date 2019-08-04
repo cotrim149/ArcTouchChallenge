@@ -43,7 +43,6 @@ extension DetailMovieViewController: MovieDetailDelegate {
 
 		movie.genres = self.movie?.genres
 		movie.posterImageData = self.movie?.posterImageData
-		movie.backdropImageData = self.movie?.backdropImageData
 		
 		self.movie = movie
 		self.tableView.reloadData()
