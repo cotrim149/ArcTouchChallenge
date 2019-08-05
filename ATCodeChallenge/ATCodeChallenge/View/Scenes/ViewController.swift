@@ -49,10 +49,18 @@ class ViewController: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 		if (segue.identifier == "DetailScreenSegue") {
+			
 			let destinationVC = segue.destination as? DetailMovieViewController
 			let indexPathSelectedRow = self.tableView.indexPathForSelectedRow
 			if let index = indexPathSelectedRow?.row {
-				let movie = movieController.movies[index]
+				
+				let movie : Movie!
+				if(self.movieController.isSearchActive) {
+					movie = movieController.filteredMovies[index]
+				} else {
+					movie = movieController.movies[index]
+				}
+				
 				destinationVC?.movie = movie
 			}
 		}
