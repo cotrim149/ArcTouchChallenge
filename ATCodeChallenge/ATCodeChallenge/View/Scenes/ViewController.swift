@@ -10,10 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
-	@IBOutlet weak var tableView: UITableView!
 	var movieController:MovieController!
 	let activityIndicator = ActivityIndicator()
 	var selectedMovieIndex = -1
+	
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var searchBar: UISearchBar!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,6 +26,8 @@ class ViewController: UIViewController {
 		self.movieController.delegate = self
 		self.movieController.retrieveTMDbConfigurations()
 		
+		searchBar.delegate = self
+
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -69,12 +73,15 @@ extension ViewController: MovieControllerDelegate {
 		self.tableView.reloadData()
 	}
 	
-	
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.movieController.movies.count
+		if (self.movieController.isSearchActive) {
+			return self.movieController.filteredMovies.count
+		} else {
+			return self.movieController.movies.count
+		}
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,10 +90,18 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		if(UIApplication.shared.statusBarOrientation.isPortrait) {
-			return self.setupMovieCellPortrait(tableView: tableView, indexPath: indexPath)
+		let movie: Movie!
+
+		if(self.movieController.isSearchActive) {
+			movie = self.movieController.filteredMovies[indexPath.row]
 		} else {
-			return self.setupMovieCellLandscape(tableView: tableView, indexPath: indexPath)
+			movie = self.movieController.movies[indexPath.row]
+		}
+		
+		if(UIApplication.shared.statusBarOrientation.isPortrait) {
+			return self.setupMovieCellPortrait(forMovie: movie, tableView: tableView, indexPath: indexPath)
+		} else {
+			return self.setupMovieCellLandscape(forMovie: movie, tableView: tableView, indexPath: indexPath)
 		}
 	}
 	
@@ -115,10 +130,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController {
 	
-	func setupMovieCellPortrait(tableView:UITableView, indexPath:IndexPath) -> MovieCell{
+	func setupMovieCellPortrait(forMovie movie:Movie, tableView:UITableView, indexPath:IndexPath) -> MovieCell{
 		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
 		
-		let movie = self.movieController.movies[indexPath.row]
 		movieCell.movieTitleLabel.text = movie.title
 		
 		if let posterImageData = movie.posterImageData {
@@ -132,10 +146,9 @@ extension ViewController {
 		return movieCell
 	}
 	
-	func setupMovieCellLandscape(tableView:UITableView, indexPath:IndexPath) -> MovieCellLandscape {
+	func setupMovieCellLandscape(forMovie movie:Movie, tableView:UITableView, indexPath:IndexPath) -> MovieCellLandscape {
 		let movieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCellLandscape", for: indexPath) as! MovieCellLandscape
 		
-		let movie = self.movieController.movies[indexPath.row]
 		movieCell.movieTitleLabel.text = movie.title
 		
 		if let posterImageData = movie.posterImageData {
@@ -150,4 +163,16 @@ extension ViewController {
 		
 		return movieCell
 	}
+}
+
+extension ViewController: UISearchBarDelegate {
+
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		self.movieController.updateFilteredMovies(movieName: searchText)
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		self.movieController.filteredMovies.removeAll()
+	}
+	
 }

@@ -16,6 +16,8 @@ protocol MovieControllerDelegate {
 class MovieController: NSObject {
 
 	var movies : [Movie] = []
+	var filteredMovies: [Movie] = []
+	var isSearchActive = false
 	var genresDict = [Int:Genre]()
 	var delegate: MovieControllerDelegate?
 	let movieDAO = MoviesDAO()
@@ -115,5 +117,22 @@ extension MovieController {
 			movie.genres = genresString as? [String]
 		}
 		
+	}
+}
+
+extension MovieController {
+	func updateFilteredMovies(movieName: String) {
+
+		if(movieName.isEmpty) {
+			self.filteredMovies.removeAll()
+			isSearchActive = false
+		} else {
+			self.filteredMovies = self.movies.filter { (movie) -> Bool in
+				(movie.title?.contains(movieName))!
+			}
+			isSearchActive = true
+		}
+
+		self.delegate?.updateUpcomingMovies()
 	}
 }

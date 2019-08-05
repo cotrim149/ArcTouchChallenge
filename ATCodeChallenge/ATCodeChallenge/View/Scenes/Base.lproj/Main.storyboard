@@ -18,8 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Type movie name" translatesAutoresizingMaskIntoConstraints="NO" id="Tkc-Zv-uDH">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="432" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-EO-NIj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="432" id="YSG-zR-jB9" customClass="MovieCell" customModule="ATCodeChallenge" customModuleProvider="target">
@@ -176,15 +180,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Tkc-Zv-uDH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="HhW-fT-a58"/>
                             <constraint firstItem="Ghd-EO-NIj" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ly2-ak-Vmh"/>
                             <constraint firstItem="Ghd-EO-NIj" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Qum-rS-cTC"/>
-                            <constraint firstItem="Ghd-EO-NIj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XQe-Bn-fg0"/>
+                            <constraint firstItem="Tkc-Zv-uDH" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="gTg-8s-cCh"/>
+                            <constraint firstItem="Tkc-Zv-uDH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vXp-fE-9eR"/>
                             <constraint firstItem="Ghd-EO-NIj" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" constant="-88" id="wiQ-NE-qg2"/>
+                            <constraint firstItem="Ghd-EO-NIj" firstAttribute="top" secondItem="Tkc-Zv-uDH" secondAttribute="bottom" id="yKj-ee-Y9J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Upcoming movies" id="nDh-gI-Wxa"/>
                     <connections>
+                        <outlet property="searchBar" destination="Tkc-Zv-uDH" id="FhI-XR-7jB"/>
                         <outlet property="tableView" destination="Ghd-EO-NIj" id="vk3-Yi-8eO"/>
                     </connections>
                 </viewController>
